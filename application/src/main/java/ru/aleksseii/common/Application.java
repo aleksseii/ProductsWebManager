@@ -59,10 +59,9 @@ public final class Application {
             final ConstraintSecurityHandler securityHandler =
                     new SecurityHandlerBuilder().build(loginService);
 
-            server.addBean(loginService);
-            securityHandler.setHandler(context);
+            context.setHandler(securityHandler);
 
-            server.setHandler(securityHandler);
+            server.setHandler(context);
 
             server.start();
 
