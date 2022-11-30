@@ -43,6 +43,8 @@ allprojects {
 
         implementation("org.jetbrains:annotations:23.0.0")
 
+        implementation("com.google.code.gson:gson:2.10")
+
         compileOnly("org.projectlombok:lombok:1.18.24")
         annotationProcessor("org.projectlombok:lombok:1.18.24")
     }
