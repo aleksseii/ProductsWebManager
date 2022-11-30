@@ -1,12 +1,13 @@
 package ru.aleksseii.dao;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
 public interface CrudDAO<T> {
 
-    @NotNull T get(int id);
+    @Nullable T get(int id);
 
     @NotNull List<@NotNull T> all();
 

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.zaxxer.hikari.HikariDataSource;
 import generated.tables.records.CompanyRecord;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
@@ -25,8 +26,12 @@ public final class CompanyDAO implements CrudDAO<Company> {
         this.dataSource = dataSource;
     }
 
+    /**
+     * @param id id to get company entity by
+     * @return company entity by id if found, null otherwise
+     */
     @Override
-    public @NotNull Company get(int id) {
+    public @Nullable Company get(int id) {
 
         try (final Connection connection = dataSource.getConnection()) {
 
@@ -41,10 +46,14 @@ public final class CompanyDAO implements CrudDAO<Company> {
             throw new RuntimeException(e);
         }
 
-        throw new IllegalArgumentException("Company with id = " + id + " does not exist");
+        return null;
     }
 
-    public @NotNull Company get(@NotNull String name) {
+    /**
+     * @param name unique name to get entity by
+     * @return company entity by name if found, null otherwise
+     */
+    public @Nullable Company get(@NotNull String name) {
 
         try (final Connection connection = dataSource.getConnection()) {
 
@@ -59,7 +68,7 @@ public final class CompanyDAO implements CrudDAO<Company> {
             throw new RuntimeException(e);
         }
 
-        throw new IllegalArgumentException("Company with name = " + name + " does not exist");
+        return null;
     }
 
     @Override

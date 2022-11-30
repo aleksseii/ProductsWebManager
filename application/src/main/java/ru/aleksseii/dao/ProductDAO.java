@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.zaxxer.hikari.HikariDataSource;
 import generated.tables.records.ProductRecord;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
@@ -25,8 +26,12 @@ public final class ProductDAO implements CrudDAO<Product> {
         this.dataSource = dataSource;
     }
 
+    /**
+     * @param id id to get product entity by
+     * @return product entity by id if found, null otherwise
+     */
     @Override
-    public @NotNull Product get(int id) {
+    public @Nullable Product get(int id) {
 
         try (final Connection connection = dataSource.getConnection()) {
 
@@ -41,7 +46,7 @@ public final class ProductDAO implements CrudDAO<Product> {
             throw new RuntimeException(e);
         }
 
-        throw new IllegalArgumentException("Product with id = " + id + " does not exist");
+        return null;
     }
 
     public @NotNull List<@NotNull Product> get(@NotNull String name) {
