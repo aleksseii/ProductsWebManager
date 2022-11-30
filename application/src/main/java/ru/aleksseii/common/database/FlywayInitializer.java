@@ -3,7 +3,7 @@ package ru.aleksseii.common.database;
 import org.flywaydb.core.Flyway;
 import org.jetbrains.annotations.NotNull;
 
-public final class FlywayInializer {
+public final class FlywayInitializer {
 
     private static final @NotNull JDBCCredentials CREDENTIALS = JDBCCredentials.getDefault();
 

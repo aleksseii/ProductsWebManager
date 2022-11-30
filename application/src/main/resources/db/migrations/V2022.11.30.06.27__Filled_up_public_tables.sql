@@ -17,5 +17,5 @@ VALUES                    ( 'product 1',    5,        1    ),
                           ( 'product 6',    7,        3    ),
                           ( 'product 7',    9,        1    ),
                           ( 'product 8',    4,        2    ),
-                          ( 'product 9',    8,        3    ),                                                                              
-                          ('product 10',    6,        1    );
+                          ( 'same name',    8,        3    ),
+                          ( 'same name',    6,        1    );
