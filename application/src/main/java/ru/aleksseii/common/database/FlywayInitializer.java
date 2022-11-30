@@ -12,8 +12,12 @@ public final class FlywayInitializer {
         final Flyway flyway = Flyway.configure()
                 .dataSource(CREDENTIALS.getUrl(), CREDENTIALS.getUsername(), CREDENTIALS.getPassword())
                 .locations("db/migrations")
+                .schemas("public", "security")
+                .cleanDisabled(false)
                 .loggers()
                 .load();
+
+        flyway.clean();
         flyway.migrate();
     }
 }

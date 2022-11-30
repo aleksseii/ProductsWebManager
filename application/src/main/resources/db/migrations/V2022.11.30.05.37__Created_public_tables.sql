@@ -2,12 +2,12 @@
 
 -- noinspection SqlDialectInspectionForFile
 
-CREATE TABLE IF NOT EXISTS public.company(
+CREATE TABLE public.company(
     company_id      SERIAL          PRIMARY KEY,
     company_name    VARCHAR(50)     NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS public.product(
+CREATE TABLE public.product(
     product_id      SERIAL          PRIMARY KEY,
     product_name    VARCHAR(50)     NOT NULL,
     amount          INT             NOT NULL

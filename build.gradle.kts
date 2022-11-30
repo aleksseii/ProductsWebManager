@@ -26,6 +26,8 @@ allprojects {
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.1")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.1")
 
+        testImplementation("org.hamcrest:hamcrest-all:1.3")
+
         implementation("com.google.inject:guice:5.1.0")
 
         implementation("org.eclipse.jetty:jetty-server:11.0.12")
