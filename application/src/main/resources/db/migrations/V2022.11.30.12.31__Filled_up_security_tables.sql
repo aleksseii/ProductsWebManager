@@ -2,7 +2,7 @@ INSERT INTO security.roles(role_name)
 VALUES                    ( 'guest' ),
                           ('manager');
                           
-INSERT INTO security.users(user_name, PASSWORD)
+INSERT INTO security.users(user_name, password)
 VALUES                    ('guest_1',  'first'),
                           ('guest_2', 'second'),
                      ('almost_admin', 'admin' );

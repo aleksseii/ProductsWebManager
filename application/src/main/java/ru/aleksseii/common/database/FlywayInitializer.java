@@ -13,10 +13,7 @@ public final class FlywayInitializer {
                 .dataSource(CREDENTIALS.getUrl(), CREDENTIALS.getUsername(), CREDENTIALS.getPassword())
                 .locations("db/migrations")
                 .loggers()
-                .cleanDisabled(false)
                 .load();
-
-        flyway.clean();
         flyway.migrate();
     }
 }
