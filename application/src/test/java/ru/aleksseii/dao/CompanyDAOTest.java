@@ -27,7 +27,7 @@ final class CompanyDAOTest {
 
     private final @NotNull CompanyDAO companyDAO = new CompanyDAO(DATA_SOURCE);
 
-    public static final @NotNull List<Company> ALL_COMPANIES = List.of(
+    private static final @NotNull List<Company> ALL_COMPANIES = List.of(
             EXISTING_COMPANY1,
             new Company(2, "company 2"),
             new Company(3, "company 3")

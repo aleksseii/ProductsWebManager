@@ -1,4 +1,4 @@
-package ru.aleksseii.auth;
+package ru.aleksseii.security;
 
 import org.eclipse.jetty.security.ConstraintMapping;
 import org.eclipse.jetty.security.ConstraintSecurityHandler;

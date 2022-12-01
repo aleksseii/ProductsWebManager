@@ -28,6 +28,8 @@ allprojects {
 
         testImplementation("org.hamcrest:hamcrest-all:1.3")
 
+        testImplementation("org.mockito:mockito-inline:4.8.1")
+
         implementation("com.google.inject:guice:5.1.0")
 
         implementation("org.eclipse.jetty:jetty-server:11.0.12")

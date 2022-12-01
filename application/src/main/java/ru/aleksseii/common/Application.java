@@ -12,7 +12,7 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.resource.Resource;
 import org.jetbrains.annotations.NotNull;
-import ru.aleksseii.auth.SecurityHandlerBuilder;
+import ru.aleksseii.security.SecurityHandlerBuilder;
 import ru.aleksseii.common.database.DataSourceManager;
 import ru.aleksseii.common.database.FlywayInitializer;
 import ru.aleksseii.servlet.ProductServlet;
