@@ -22,15 +22,16 @@ final class CompanyDAOTest {
     private static final @NotNull String NEW_NAME = "new name";
     private static final Company EXISTING_COMPANY1 = new Company(EXISTING_ID1, EXISTING_NAME1);
 
-    private static final @NotNull List<Company> ALL_COMPANIES = List.of(
-            EXISTING_COMPANY1,
-            new Company(2, "company 2"),
-            new Company(3, "company 3")
-    );
 
     private static final @NotNull HikariDataSource DATA_SOURCE = DataSourceManager.getHikariDataSource();
 
     private final @NotNull CompanyDAO companyDAO = new CompanyDAO(DATA_SOURCE);
+
+    public static final @NotNull List<Company> ALL_COMPANIES = List.of(
+            EXISTING_COMPANY1,
+            new Company(2, "company 2"),
+            new Company(3, "company 3")
+    );
 
     @AfterAll
     static void closeDataSource() {
@@ -96,7 +97,7 @@ final class CompanyDAOTest {
     }
 
     @Test
-    void shouldDeleteCompany() {
+    void shouldDeleteById() {
 
         int id = EXISTING_ID1;
         int sizeBefore = companyDAO.all().size();
@@ -105,6 +106,18 @@ final class CompanyDAOTest {
 
         assertEquals(sizeBefore - 1, sizeAfter);
         assertNull(companyDAO.get(id));
+    }
+
+    @Test
+    void shouldDeleteByName() {
+
+        String name = EXISTING_NAME1;
+        int sizeBefore = companyDAO.all().size();
+        companyDAO.delete(name);
+        int sizeAfter = companyDAO.all().size();
+
+        assertEquals(sizeBefore - 1, sizeAfter);
+        assertNull(companyDAO.get(name));
     }
 
     @Test

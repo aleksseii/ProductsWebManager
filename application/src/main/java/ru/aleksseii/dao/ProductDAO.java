@@ -143,6 +143,30 @@ public final class ProductDAO implements CrudDAO<Product> {
         }
     }
 
+    /**
+     * delete a few product entities having name same as provided name
+     * @param name name to delete product entities by
+     * @return amount of deleted entities
+     */
+    public int delete(@NotNull String name) {
+
+        try (final Connection connection = dataSource.getConnection()) {
+
+            final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
+
+            Result<ProductRecord> productRecords = context.fetch(PRODUCT, PRODUCT.PRODUCT_NAME.equal(name));
+            int deletedAmount = productRecords.size();
+
+            for (ProductRecord product : productRecords) {
+                product.delete();
+            }
+            return deletedAmount;
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void deleteAll() {
 

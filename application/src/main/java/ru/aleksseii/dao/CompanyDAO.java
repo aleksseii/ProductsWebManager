@@ -146,6 +146,23 @@ public final class CompanyDAO implements CrudDAO<Company> {
         }
     }
 
+    public void delete(@NotNull String name) {
+
+        try (final Connection connection = dataSource.getConnection()) {
+
+            final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
+
+            final CompanyRecord companyRecord = context.fetchOne(COMPANY, COMPANY.COMPANY_NAME.equal(name));
+
+            if (companyRecord != null) {
+                companyRecord.delete();
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public void deleteAll() {
 
