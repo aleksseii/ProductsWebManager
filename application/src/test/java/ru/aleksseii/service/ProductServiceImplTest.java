@@ -18,7 +18,7 @@ import static org.mockito.Mockito.*;
 
 final class ProductServiceImplTest {
 
-    public static final @NotNull List<@NotNull Product> ALL_PRODUCTS = List.of(
+    private static final @NotNull List<@NotNull Product> ALL_PRODUCTS = List.of(
             new Product(1,  "product 1", 5, 1),
             new Product(2,  "product 2", 3, 2),
             new Product(3,  "product 3",10, 3),
