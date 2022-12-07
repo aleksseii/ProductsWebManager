@@ -16,7 +16,9 @@ public final class SecurityHandlerBuilder {
 
     private static final @NotNull String ROLE_MANAGER = "manager";
     private static final @NotNull String ROLE_GUEST = "guest";
-    private static final @NotNull List<@NotNull String> WEB_PAGES = List.of("/product");
+
+    private static final @NotNull List<@NotNull String> MANAGER_WEB_PAGES = List.of("/product/all", "/product/add");
+    private static final @NotNull List<@NotNull String> GUEST_WEB_PAGES = List.of("/product/all");
 
 
     public @NotNull ConstraintSecurityHandler build(@NotNull LoginService loginService) {
@@ -29,8 +31,8 @@ public final class SecurityHandlerBuilder {
         Constraint guestConstraint = buildConstraint(ROLE_GUEST, ROLE_MANAGER);
 
         List<ConstraintMapping> constraintMappings = Stream.concat(
-                constraintAllMapping(managerConstraint, WEB_PAGES).stream(),
-                constraintGetMapping(guestConstraint, WEB_PAGES).stream()
+                constraintAllMapping(managerConstraint, MANAGER_WEB_PAGES).stream(),
+                constraintGetMapping(guestConstraint, GUEST_WEB_PAGES).stream()
         ).toList();
 
         securityHandler.setConstraintMappings(constraintMappings);

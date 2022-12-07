@@ -15,7 +15,8 @@ import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.security.SecurityHandlerBuilder;
 import ru.aleksseii.common.database.DataSourceManager;
 import ru.aleksseii.common.database.FlywayInitializer;
-import ru.aleksseii.servlet.ProductServlet;
+import ru.aleksseii.servlet.AddProductServlet;
+import ru.aleksseii.servlet.GetProductsServlet;
 
 import java.net.URL;
 
@@ -28,7 +29,8 @@ public final class Application {
         final HikariDataSource dataSource = DataSourceManager.getHikariDataSource();
         final Injector injector = Guice.createInjector(new ProductsWebManagerModule(dataSource));
 
-        final ProductServlet productServlet = injector.getInstance(ProductServlet.class);
+        final GetProductsServlet getProductsServlet = injector.getInstance(GetProductsServlet.class);
+        final AddProductServlet addProductServlet = injector.getInstance(AddProductServlet.class);
 
         try {
 
@@ -45,8 +47,12 @@ public final class Application {
                     "/*"
             );
             context.addServlet(
-                    new ServletHolder("product-servlet", productServlet),
-                    "/product"
+                    new ServletHolder("get-products-servlet", getProductsServlet),
+                    "/product/all"
+            );
+            context.addServlet(
+                    new ServletHolder("add-product-servlet", addProductServlet),
+                    "/product/add"
             );
 
             final URL jdbcConfigURL = getJdbcConfigURL();

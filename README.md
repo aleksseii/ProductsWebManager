@@ -6,9 +6,9 @@ VK Java Course Homeworks:
 ## Справка
 Для получения справки по командам [No Role]: http://localhost:3466/  
 
-Для получения списка всех продуктов [Guest or Manager]: **GET** http://localhost:3466/product  
+Для получения списка всех продуктов [Guest or Manager]: **GET** http://localhost:3466/product/all  
 
-Для добавления нового продукта [Manager]: **POST** http://localhost:3466/product?productName={string}&companyName={string}&amount={integer}  
+Для добавления нового продукта [Manager]: **POST** http://localhost:3466/product/add?productName={string}&companyName={string}&amount={integer}  
 (Подставьте свои значения вместо {string}, {integer} соответсвующих типов)
 
 Для просмотра списка всех продуктов рекомендуется использовать расширение для Chrome [JSON Formatter](https://github.com/callumlocke/json-formatter) или другой аналогичный инструмент для форматирования JSON.  
