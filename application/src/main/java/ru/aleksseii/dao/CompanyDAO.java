@@ -95,15 +95,11 @@ public final class CompanyDAO implements CrudDAO<Company> {
 
             final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
 
-            int companyId = entity.getCompanyId();
-            final CompanyRecord companyRecord = context.fetchOne(COMPANY, COMPANY.COMPANY_ID.equal(companyId));
-
-            if (companyRecord != null) {
-
-                companyRecord
-                        .setCompanyName(entity.getCompanyName())
-                        .store();
-            }
+            context
+                    .update(COMPANY)
+                    .set(COMPANY.COMPANY_NAME, entity.getCompanyName())
+                    .where(COMPANY.COMPANY_ID.equal(entity.getCompanyId()))
+                    .execute();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);

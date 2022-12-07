@@ -89,17 +89,13 @@ public final class ProductDAO implements CrudDAO<Product> {
 
             final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
 
-            int productId = entity.getProductId();
-            final ProductRecord productRecord = context.fetchOne(PRODUCT, PRODUCT.PRODUCT_ID.equal(productId));
-
-            if (productRecord != null) {
-
-                productRecord
-                        .setProductName(entity.getProductName())
-                        .setAmount(entity.getAmount())
-                        .setCompanyId(entity.getCompanyId())
-                        .store();
-            }
+            context
+                    .update(PRODUCT)
+                    .set(PRODUCT.PRODUCT_NAME, entity.getProductName())
+                    .set(PRODUCT.AMOUNT, entity.getAmount())
+                    .set(PRODUCT.COMPANY_ID, entity.getCompanyId())
+                    .where(PRODUCT.PRODUCT_ID. equal(entity.getProductId()))
+                    .execute();
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
