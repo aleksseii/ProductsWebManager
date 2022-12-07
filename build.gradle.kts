@@ -47,7 +47,6 @@ allprojects {
 
         implementation("org.jooq:jooq:3.17.5")
         implementation("org.jooq:jooq-codegen:3.17.5")
-        implementation("org.jooq:jooq-meta:3.17.5")
 
         implementation("org.postgresql:postgresql:42.5.1")
 
