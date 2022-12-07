@@ -28,6 +28,15 @@ public final class ProductController {
         return productService.getAllProducts();
     }
 
+    @GET
+    @Path("/all/{companyName}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
+    public @NotNull List<@NotNull ProductDTO> getProductsByCompany(@NotNull @PathParam("companyName") String companyName) {
+
+        return productService.getProductsByCompany(companyName);
+    }
+
     @POST
     @Path("/add")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -35,5 +44,18 @@ public final class ProductController {
 
         productService.saveProduct(productDTO.productName(), productDTO.companyName(), productDTO.amount());
         return Response.ok().build();
+    }
+
+    @POST
+    @Path("/delete/{name}")
+    @Consumes(MediaType.TEXT_PLAIN)
+    public @NotNull Response deleteProductsByName(@NotNull @PathParam("name") String productName) {
+
+        final int productsDeleted = productService.deleteProductsByName(productName);
+
+        if (productsDeleted > 0) {
+            return Response.ok().build();
+        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }
