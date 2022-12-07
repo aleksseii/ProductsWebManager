@@ -3,12 +3,11 @@ package ru.aleksseii.servlet;
 import com.google.gson.Gson;
 import com.google.inject.Inject;
 import generated.tables.pojos.Product;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.service.ProductService;
-
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

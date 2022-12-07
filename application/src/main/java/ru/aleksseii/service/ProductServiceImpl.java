@@ -3,6 +3,7 @@ package ru.aleksseii.service;
 import com.google.inject.Inject;
 import generated.tables.pojos.Company;
 import generated.tables.pojos.Product;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.dao.CompanyDAO;
 import ru.aleksseii.dao.ProductDAO;
@@ -13,6 +14,7 @@ public final class ProductServiceImpl implements ProductService {
 
     private final @NotNull ProductDAO productDAO;
 
+    @Getter
     private final @NotNull CompanyDAO companyDAO;
 
     @Inject

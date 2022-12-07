@@ -1,19 +1,20 @@
 package ru.aleksseii.servlet;
 
 import com.google.inject.Inject;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.service.ProductService;
 
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 public final class AddProductServlet extends HttpServlet {
 
-    private final @NotNull ProductService productServiceImpl;
+    private final @NotNull ProductService productService;
 
     @Inject
-    public AddProductServlet(@NotNull ProductService productServiceImpl) {
-        this.productServiceImpl = productServiceImpl;
+    public AddProductServlet(@NotNull ProductService productService) {
+        this.productService = productService;
     }
 
     @Override
@@ -24,7 +25,7 @@ public final class AddProductServlet extends HttpServlet {
         final String companyName = request.getParameter("companyName");
         final int amount = Integer.parseInt(request.getParameter("amount"));
 
-        productServiceImpl.saveProduct(productName, companyName, amount);
+        productService.saveProduct(productName, companyName, amount);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
