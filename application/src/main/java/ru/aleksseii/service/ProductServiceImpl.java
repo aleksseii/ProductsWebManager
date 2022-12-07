@@ -37,14 +37,13 @@ public final class ProductServiceImpl implements ProductService {
     @Override
     public @NotNull List<@NotNull ProductDTO> getProductsByCompany(@NotNull String companyName) {
 
-        Company company = companyDAO.get(companyName);
+        final Company company = companyDAO.get(companyName);
         if (company == null) {
             return new ArrayList<>();
         }
-        List<@NotNull Product> allProducts = productDAO.all();
-        return allProducts
+        List<@NotNull Product> products = productDAO.getByCompany(company.getCompanyId());
+        return products
                 .stream()
-                .filter(p -> p.getCompanyId().equals(company.getCompanyId()))
                 .map(p -> new ProductDTO(p, companyName))
                 .toList();
     }
