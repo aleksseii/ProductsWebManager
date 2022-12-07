@@ -55,8 +55,6 @@ allprojects {
 
         implementation("org.jetbrains:annotations:23.0.0")
 
-        // TODO: replace Gson usage with Jackson and remove this dependency
-        implementation("com.google.code.gson:gson:2.10")
         implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
 
         compileOnly("javax.servlet:javax.servlet-api:4.0.1")

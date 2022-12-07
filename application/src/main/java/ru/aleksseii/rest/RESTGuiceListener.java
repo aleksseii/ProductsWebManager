@@ -5,6 +5,7 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import org.jboss.resteasy.plugins.guice.GuiceResteasyBootstrapServletContextListener;
 import org.jetbrains.annotations.NotNull;
+import ru.aleksseii.rest.controller.HelpMessageController;
 import ru.aleksseii.rest.controller.ProductController;
 import ru.aleksseii.service.ProductService;
 
@@ -31,9 +32,10 @@ public final class RESTGuiceListener extends GuiceResteasyBootstrapServletContex
         @Override
         protected void configure() {
 
-            ProductService productService = mainInjector.getInstance(ProductService.class);
+            final ProductService productService = mainInjector.getInstance(ProductService.class);
 
             bind(ProductController.class).toInstance(new ProductController(productService));
+            bind(HelpMessageController.class).toInstance(new HelpMessageController());
         }
     }
 }

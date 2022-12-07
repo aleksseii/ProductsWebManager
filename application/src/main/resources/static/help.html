@@ -6,7 +6,17 @@
     </head>
     <body>
         <h1>HELP</h1>
-        <p>To get list of all products [Guest or Manager]: GET http://localhost:3466/product/all</p>
-        <p>To add new product [Manager]: POST http://localhost:3466/product/add?productName={string}&companyName={string}&amount={integer}</p>
+        <h3>To see this help message [No Role, Guest or Manager]:</h3> <p>GET http://localhost:3466 </p><br>
+
+        <h3>To get list of all products [Guest or Manager]:</h3> <p>GET http://localhost:3466/product/all</p><br>
+        <h3>To get list of all products produced by company with provided name [Guest or Manager]:</h3> <p>GET http://localhost:3466/product/all/{string}</p>
+        <p>(provide name of company instead of `{string}` of corresponding type)</p><br>
+
+        <h3>To add new product [Manager]:</h3> <p>POST http://localhost:3466/product/add</p>
+        <p>provide characteristics of new product in the request's body with JSON like
+            { "productName" : {string}, "companyName" : {string}, "amount" : {integer} }</p>
+        <p>(provide product characteristics instead of `{string}`, `{integer}` of corresponding types)</p><br>
+        <h3>To delete products with provided name [Manager]:</h3> <p>POST http://localhost:3466/product/delete/{string}</p>
+        <p>(provide product name instead of `{string}` of corresponding type)</p><br>
     </body>
 </html>

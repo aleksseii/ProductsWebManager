@@ -8,7 +8,6 @@ import org.eclipse.jetty.security.JDBCLoginService;
 import org.eclipse.jetty.security.LoginService;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.util.resource.Resource;
 import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.common.database.DataSourceManager;
@@ -33,10 +32,7 @@ public final class Application {
 
             final ServletContextHandler context = new ServletContextHandler();
 
-            final URL helpURL = getHelpURL();
-
             context.setContextPath("/");
-            context.setBaseResource(Resource.newResource(helpURL.toExternalForm()));
             context.addServlet(HttpServletDispatcher.class, "/");
 
             final RESTGuiceListener restGuiceListener = new RESTGuiceListener(mainInjector);
@@ -61,14 +57,6 @@ public final class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static @NotNull URL getHelpURL() {
-
-        final URL helpURL = Application.class.getResource("/static/help.html");
-        assert helpURL != null;
-
-        return helpURL;
     }
 
     private static @NotNull URL getJdbcConfigURL() {

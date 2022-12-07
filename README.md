@@ -4,14 +4,22 @@ VK Java Course Homeworks:
 * 8-th homework: REST API using RESTEasy, Jackson (`hw8-rest` branch)
 
 ## Справка
-Для получения справки по командам [No Role]: http://localhost:3466/  
+Для получения справки по командам [No Role, Guest or Manager]: http://localhost:3466/  
 
 Для получения списка всех продуктов [Guest or Manager]: **GET** http://localhost:3466/product/all  
+Для получения списка всех продуктов, поставленных конкретной компанией [Guest or Manager]:   
+**GET** http://localhost:3466/product/all/{string}  
+(Подставьте название интересующей компании вместо {string} соответсвующего типа)
 
-Для добавления нового продукта [Manager]: **POST** http://localhost:3466/product/add?productName={string}&companyName={string}&amount={integer}  
+Для добавления нового продукта [Manager]: **POST** http://localhost:3466/product/add  
+Передайте характеристики нового продукта в теле запроса в виде JSON вида:  
+{ "productName" : {string}, "companyName" : {string}, "amount" : {integer} }  
 (Подставьте свои значения вместо {string}, {integer} соответсвующих типов)
 
-Для просмотра списка всех продуктов рекомендуется использовать расширение для Chrome [JSON Formatter](https://github.com/callumlocke/json-formatter) или другой аналогичный инструмент для форматирования JSON.  
+Для удаления продуктов с указанным именем [Manager]: **POST** http://localhost:3466/product/delete/{string}
+(Подставьте имя продукта вместо {string} соответсвующего типа)
+
+Для просмотра списка продуктов рекомендуется использовать расширение для Chrome [JSON Formatter](https://github.com/callumlocke/json-formatter) или другой аналогичный инструмент для форматирования JSON.  
 
 Для тестирования POST запросов рекомендуется использовать [Postman](https://www.postman.com/) или [Insomnia](https://insomnia.rest/)
 
