@@ -39,6 +39,14 @@ public class Product implements Serializable {
         this.companyId = companyId;
     }
 
+    public Product(
+            String productName,
+            Integer amount,
+            Integer companyId
+    ) {
+        this(0, productName, amount, companyId);
+    }
+
     /**
      * Getter for <code>public.product.product_id</code>.
      */

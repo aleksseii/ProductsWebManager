@@ -1,5 +1,7 @@
 package ru.aleksseii.service;
 
+import generated.tables.pojos.Company;
+import generated.tables.pojos.Product;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,8 +9,6 @@ import org.mockito.ArgumentMatchers;
 import org.mockito.Mock;
 import ru.aleksseii.dao.CompanyDAO;
 import ru.aleksseii.dao.ProductDAO;
-import ru.aleksseii.model.Company;
-import ru.aleksseii.model.Product;
 
 import java.util.List;
 

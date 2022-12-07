@@ -2,6 +2,7 @@ package ru.aleksseii.dao;
 
 import com.google.inject.Inject;
 import com.zaxxer.hikari.HikariDataSource;
+import generated.tables.pojos.Product;
 import generated.tables.records.ProductRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,7 +10,6 @@ import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
-import ru.aleksseii.model.Product;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -89,15 +89,15 @@ public final class ProductDAO implements CrudDAO<Product> {
 
             final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
 
-            int productId = entity.productId();
+            int productId = entity.getProductId();
             final ProductRecord productRecord = context.fetchOne(PRODUCT, PRODUCT.PRODUCT_ID.equal(productId));
 
             if (productRecord != null) {
 
                 productRecord
-                        .setProductName(entity.productName())
-                        .setAmount(entity.amount())
-                        .setCompanyId(entity.companyId())
+                        .setProductName(entity.getProductName())
+                        .setAmount(entity.getAmount())
+                        .setCompanyId(entity.getCompanyId())
                         .store();
             }
 
@@ -116,9 +116,9 @@ public final class ProductDAO implements CrudDAO<Product> {
             final ProductRecord productRecord = context.newRecord(PRODUCT);
 
             productRecord
-                    .setProductName(entity.productName())
-                    .setAmount(entity.amount())
-                    .setCompanyId(entity.companyId())
+                    .setProductName(entity.getProductName())
+                    .setAmount(entity.getAmount())
+                    .setCompanyId(entity.getCompanyId())
                     .store();
 
         } catch (SQLException e) {

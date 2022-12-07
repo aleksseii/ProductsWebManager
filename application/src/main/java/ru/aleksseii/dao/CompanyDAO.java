@@ -2,6 +2,7 @@ package ru.aleksseii.dao;
 
 import com.google.inject.Inject;
 import com.zaxxer.hikari.HikariDataSource;
+import generated.tables.pojos.Company;
 import generated.tables.records.CompanyRecord;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -9,7 +10,6 @@ import org.jooq.DSLContext;
 import org.jooq.Result;
 import org.jooq.SQLDialect;
 import org.jooq.impl.DSL;
-import ru.aleksseii.model.Company;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -95,13 +95,13 @@ public final class CompanyDAO implements CrudDAO<Company> {
 
             final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
 
-            int companyId = entity.companyId();
+            int companyId = entity.getCompanyId();
             final CompanyRecord companyRecord = context.fetchOne(COMPANY, COMPANY.COMPANY_ID.equal(companyId));
 
             if (companyRecord != null) {
 
                 companyRecord
-                        .setCompanyName(entity.companyName())
+                        .setCompanyName(entity.getCompanyName())
                         .store();
             }
 
@@ -120,7 +120,7 @@ public final class CompanyDAO implements CrudDAO<Company> {
             final CompanyRecord companyRecord = context.newRecord(COMPANY);
 
             companyRecord
-                    .setCompanyName(entity.companyName())
+                    .setCompanyName(entity.getCompanyName())
                     .store();
 
         } catch (SQLException e) {

@@ -1,7 +1,7 @@
 package ru.aleksseii.service;
 
+import generated.tables.pojos.Product;
 import org.jetbrains.annotations.NotNull;
-import ru.aleksseii.model.Product;
 
 import java.util.List;
 

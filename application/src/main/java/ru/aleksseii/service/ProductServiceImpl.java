@@ -1,11 +1,11 @@
 package ru.aleksseii.service;
 
 import com.google.inject.Inject;
+import generated.tables.pojos.Company;
+import generated.tables.pojos.Product;
 import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.dao.CompanyDAO;
 import ru.aleksseii.dao.ProductDAO;
-import ru.aleksseii.model.Company;
-import ru.aleksseii.model.Product;
 
 import java.util.List;
 
@@ -40,7 +40,7 @@ public final class ProductServiceImpl implements ProductService {
         }
 
         assert company != null;
-        final Product product = new Product(productName, amount, company.companyId());
+        final Product product = new Product(productName, amount, company.getCompanyId());
         productDAO.save(product);
     }
 }

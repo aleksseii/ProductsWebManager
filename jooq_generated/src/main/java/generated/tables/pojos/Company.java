@@ -31,6 +31,10 @@ public class Company implements Serializable {
         this.companyName = companyName;
     }
 
+    public Company(String companyName) {
+        this(0, companyName);
+    }
+
     /**
      * Getter for <code>public.company.company_id</code>.
      */

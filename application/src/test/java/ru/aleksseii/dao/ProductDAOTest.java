@@ -1,13 +1,13 @@
 package ru.aleksseii.dao;
 
 import com.zaxxer.hikari.HikariDataSource;
+import generated.tables.pojos.Product;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.aleksseii.common.database.DataSourceManager;
 import ru.aleksseii.common.database.FlywayInitializer;
-import ru.aleksseii.model.Product;
 
 import java.util.List;
 
