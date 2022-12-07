@@ -65,6 +65,23 @@ public final class ProductDAO implements CrudDAO<Product> {
         }
     }
 
+    public @NotNull List<@NotNull Product> getByCompany(int companyId) {
+
+        try (final Connection connection = dataSource.getConnection()) {
+
+            final DSLContext context = DSL.using(connection, SQLDialect.POSTGRES);
+
+            final Result<ProductRecord> productRecords = context.fetch(PRODUCT, PRODUCT.COMPANY_ID.equal(companyId));
+
+            return productRecords.stream()
+                    .map(productRecord -> productRecord.into(Product.class))
+                    .toList();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     @Override
     public @NotNull List<@NotNull Product> all() {
 

@@ -22,7 +22,8 @@ final class ProductDAOTest {
     private static final @NotNull String EXISTING_NAME10 = "same name";
     private static final @NotNull String NEW_NAME = "new name";
 
-    private static final int EXISTING_COMPANY_ID = 3;
+    private static final int EXISTING_COMPANY_ID1 = 1;
+    private static final int EXISTING_COMPANY_ID3 = 3;
 
     private static final int NEW_AMOUNT = 17;
 
@@ -81,10 +82,23 @@ final class ProductDAOTest {
     }
 
     @Test
+    void shouldGetProductsByCompanyId() {
+
+        List<Product> expectedProducts = List.of(
+                ALL_PRODUCTS.get(0),
+                ALL_PRODUCTS.get(3),
+                ALL_PRODUCTS.get(6),
+                ALL_PRODUCTS.get(9)
+        );
+        List<@NotNull Product> products = productDAO.getByCompany(EXISTING_COMPANY_ID1);
+        assertThat(expectedProducts, containsInAnyOrder(products.toArray()));
+    }
+
+    @Test
     void shouldUpdateProduct() {
 
         int id = EXISTING_ID10;
-        Product expectedProduct = new Product(id, NEW_NAME, NEW_AMOUNT, EXISTING_COMPANY_ID);
+        Product expectedProduct = new Product(id, NEW_NAME, NEW_AMOUNT, EXISTING_COMPANY_ID3);
 
         int sizeBefore = productDAO.all().size();
         productDAO.update(expectedProduct);
@@ -99,7 +113,7 @@ final class ProductDAOTest {
 
         int sizeBefore = productDAO.all().size();
         int nextId = sizeBefore + 1;
-        Product newProduct = new Product(nextId, NEW_NAME, NEW_AMOUNT, EXISTING_COMPANY_ID);
+        Product newProduct = new Product(nextId, NEW_NAME, NEW_AMOUNT, EXISTING_COMPANY_ID3);
 
         productDAO.save(newProduct);
         int sizeAfter = productDAO.all().size();
