@@ -17,9 +17,16 @@ public final class SecurityHandlerBuilder {
     private static final @NotNull String ROLE_MANAGER = "manager";
     private static final @NotNull String ROLE_GUEST = "guest";
 
-    private static final @NotNull List<@NotNull String> MANAGER_WEB_PAGES = List.of("/product/all", "/product/add");
-    private static final @NotNull List<@NotNull String> GUEST_WEB_PAGES = List.of("/product/all");
-
+    private static final @NotNull List<@NotNull String> MANAGER_WEB_PAGES = List.of(
+            "/product/all",
+            "/product/all/*",
+            "/product/add",
+            "/product/delete/*"
+    );
+    private static final @NotNull List<@NotNull String> GUEST_WEB_PAGES = List.of(
+            "/product/all",
+            "/product/all/*"
+    );
 
     public @NotNull ConstraintSecurityHandler build(@NotNull LoginService loginService) {
 

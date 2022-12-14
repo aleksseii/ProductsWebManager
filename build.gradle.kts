@@ -1,3 +1,5 @@
+@file:Suppress("GradlePackageUpdate", "VulnerableLibrariesLocal")
+
 plugins {
     java
     `kotlin-dsl`
@@ -31,15 +33,20 @@ allprojects {
         testImplementation("org.mockito:mockito-inline:4.8.1")
 
         implementation("com.google.inject:guice:5.1.0")
+        implementation("com.google.inject.extensions:guice-servlet:5.1.0")
 
-        implementation("org.eclipse.jetty:jetty-server:11.0.12")
-        implementation("org.eclipse.jetty:jetty-servlet:11.0.12")
+        implementation("org.eclipse.jetty:jetty-server:9.4.33.v20201020")
+        implementation("org.eclipse.jetty:jetty-servlet:9.4.33.v20201020")
+
+        implementation("javax.ws.rs:javax.ws.rs-api:2.1.1")
+
+        implementation("org.jboss.resteasy:resteasy-guice:4.7.7.Final")
+        implementation("org.jboss.resteasy:resteasy-jackson2-provider:4.7.7.Final")
 
         implementation("com.zaxxer:HikariCP:5.0.1")
 
         implementation("org.jooq:jooq:3.17.5")
         implementation("org.jooq:jooq-codegen:3.17.5")
-        implementation("org.jooq:jooq-meta:3.17.5")
 
         implementation("org.postgresql:postgresql:42.5.1")
 
@@ -47,7 +54,9 @@ allprojects {
 
         implementation("org.jetbrains:annotations:23.0.0")
 
-        implementation("com.google.code.gson:gson:2.10")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.14.1")
+
+        compileOnly("javax.servlet:javax.servlet-api:4.0.1")
 
         compileOnly("org.projectlombok:lombok:1.18.24")
         annotationProcessor("org.projectlombok:lombok:1.18.24")

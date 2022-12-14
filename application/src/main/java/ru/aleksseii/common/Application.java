@@ -7,16 +7,13 @@ import org.eclipse.jetty.security.ConstraintSecurityHandler;
 import org.eclipse.jetty.security.JDBCLoginService;
 import org.eclipse.jetty.security.LoginService;
 import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
-import org.eclipse.jetty.servlet.ServletHolder;
-import org.eclipse.jetty.util.resource.Resource;
+import org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher;
 import org.jetbrains.annotations.NotNull;
-import ru.aleksseii.security.SecurityHandlerBuilder;
 import ru.aleksseii.common.database.DataSourceManager;
 import ru.aleksseii.common.database.FlywayInitializer;
-import ru.aleksseii.servlet.AddProductServlet;
-import ru.aleksseii.servlet.GetProductsServlet;
+import ru.aleksseii.rest.RESTGuiceListener;
+import ru.aleksseii.security.SecurityHandlerBuilder;
 
 import java.net.URL;
 
@@ -27,33 +24,19 @@ public final class Application {
         FlywayInitializer.initDB();
 
         final HikariDataSource dataSource = DataSourceManager.getHikariDataSource();
-        final Injector injector = Guice.createInjector(new ProductsWebManagerModule(dataSource));
-
-        final GetProductsServlet getProductsServlet = injector.getInstance(GetProductsServlet.class);
-        final AddProductServlet addProductServlet = injector.getInstance(AddProductServlet.class);
+        Injector mainInjector = Guice.createInjector(new ProductsWebManagerModule(dataSource));
 
         try {
 
             final Server server = DefaultServer.build();
 
-            final ServletContextHandler context = new ServletContextHandler(ServletContextHandler.NO_SESSIONS);
-
-            final URL helpURL = getHelpURL();
+            final ServletContextHandler context = new ServletContextHandler();
 
             context.setContextPath("/");
-            context.setBaseResource(Resource.newResource(helpURL.toExternalForm()));
-            context.addServlet(
-                    new ServletHolder("default-servlet", DefaultServlet.class),
-                    "/*"
-            );
-            context.addServlet(
-                    new ServletHolder("get-products-servlet", getProductsServlet),
-                    "/product/all"
-            );
-            context.addServlet(
-                    new ServletHolder("add-product-servlet", addProductServlet),
-                    "/product/add"
-            );
+            context.addServlet(HttpServletDispatcher.class, "/");
+
+            final RESTGuiceListener restGuiceListener = new RESTGuiceListener(mainInjector);
+            context.addEventListener(restGuiceListener);
 
             final URL jdbcConfigURL = getJdbcConfigURL();
 
@@ -74,14 +57,6 @@ public final class Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-    }
-
-    private static @NotNull URL getHelpURL() {
-
-        final URL helpURL = Application.class.getResource("/static/help.html");
-        assert helpURL != null;
-
-        return helpURL;
     }
 
     private static @NotNull URL getJdbcConfigURL() {

@@ -6,7 +6,9 @@ import generated.tables.pojos.Product;
 import org.jetbrains.annotations.NotNull;
 import ru.aleksseii.dao.CompanyDAO;
 import ru.aleksseii.dao.ProductDAO;
+import ru.aleksseii.rest.dto.ProductDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public final class ProductServiceImpl implements ProductService {
@@ -22,8 +24,28 @@ public final class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public @NotNull List<@NotNull Product> getAllProducts() {
-        return productDAO.all();
+    public @NotNull List<@NotNull ProductDTO> getAllProducts() {
+        return productDAO.all()
+                .stream()
+                .map(p -> {
+                    final Company company = companyDAO.get(p.getCompanyId());
+                    assert company != null;
+                    return new ProductDTO(p, company.getCompanyName());
+                }).toList();
+    }
+
+    @Override
+    public @NotNull List<@NotNull ProductDTO> getProductsByCompany(@NotNull String companyName) {
+
+        final Company company = companyDAO.get(companyName);
+        if (company == null) {
+            return new ArrayList<>();
+        }
+        List<@NotNull Product> products = productDAO.getByCompany(company.getCompanyId());
+        return products
+                .stream()
+                .map(p -> new ProductDTO(p, companyName))
+                .toList();
     }
 
     @Override
@@ -42,5 +64,15 @@ public final class ProductServiceImpl implements ProductService {
         assert company != null;
         final Product product = new Product(productName, amount, company.getCompanyId());
         productDAO.save(product);
+    }
+
+    /**
+     * @param productName name of product to delete entities by
+     * @return amount of deleted entities
+     */
+    @Override
+    public int deleteProductsByName(@NotNull String productName) {
+
+        return productDAO.delete(productName);
     }
 }
